@@ -11,9 +11,9 @@
 # Use this script on root of kernel directory
 
 SECONDS=0 # builtin bash timer
-LOCAL_DIR=skv/
-ZIPNAME="SKVKernel-ginkgo-$(TZ=Europe/Madrid date +"%Y%m%d-%H%M").zip"
-ZIPNAME_KSU="SKVKernel-ginkgo-KSU-$(TZ=Europe/Madrid date +"%Y%m%d-%H%M").zip"
+LOCAL_DIR=/opt/munir/
+ZIPNAME="EklerKernel-ginkgo-$(TZ=Asia/Baku date +"%Y%m%d-%H%M").zip"
+ZIPNAME_KSU="EklerKernel-ginkgo-KSU-$(TZ=Asia/Baku date +"%Y%m%d-%H%M").zip"
 TC_DIR="${LOCAL_DIR}toolchain"
 CLANG_DIR="${TC_DIR}/clang-rastamod"
 GCC_64_DIR="${LOCAL_DIR}toolchain/aarch64-linux-android-4.9"

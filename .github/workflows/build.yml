@@ -28,4 +28,4 @@ jobs:
       with:
         name: Kernel-Build
         path: |
-          skv/*.zip
+          /opt/magmaskv/*.zip

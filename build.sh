@@ -11,9 +11,9 @@
 # Use this script on root of kernel directory
 
 SECONDS=0 # builtin bash timer
-LOCAL_DIR=/opt/munir/
-ZIPNAME="EklerKernel-ginkgo-$(TZ=Asia/Baku date +"%Y%m%d-%H%M").zip"
-ZIPNAME_KSU="EklerKernel-ginkgo-KSU-$(TZ=Asia/Baku date +"%Y%m%d-%H%M").zip"
+LOCAL_DIR=skv/
+ZIPNAME="SKVKernel-ginkgo-$(TZ=Europe/Madrid date +"%Y%m%d-%H%M").zip"
+ZIPNAME_KSU="SKVKernel-ginkgo-KSU-$(TZ=Europe/Madrid date +"%Y%m%d-%H%M").zip"
 TC_DIR="${LOCAL_DIR}toolchain"
 CLANG_DIR="${TC_DIR}/clang-rastamod"
 GCC_64_DIR="${LOCAL_DIR}toolchain/aarch64-linux-android-4.9"
@@ -22,8 +22,8 @@ AK3_DIR="${LOCAL_DIR}/Dynamic/AnyKernel3"
 DEFCONFIG="vendor/ginkgo-perf_defconfig"
 
 export PATH="$CLANG_DIR/bin:$PATH"
-export KBUILD_BUILD_USER="Munir"
-export KBUILD_BUILD_HOST="ShawkTeam"
+export KBUILD_BUILD_USER="MagmaSKV"
+export KBUILD_BUILD_HOST="SKV"
 export LD_LIBRARY_PATH="$CLANG_DIR/lib:$LD_LIBRARY_PATH"
 export KBUILD_BUILD_VERSION="1"
 export LOCALVERSION
@@ -96,7 +96,7 @@ echo -e "\nKernel compiled succesfully! Zipping up...\n"
 git restore arch/arm64/configs/vendor/ginkgo-perf_defconfig
 if [ -d "$AK3_DIR" ]; then
 cp -r $AK3_DIR AnyKernel3
-elif ! git clone -q -b dynamic https://github.com/mnasibzade/AnyKernel3; then
+elif ! git clone -q -b dynamic https://github.com/MagmaSKV/AnyKernel3; then
 echo -e "\nAnyKernel3 repo not found locally and cloning failed! Aborting..."
 exit 1
 fi
@@ -113,13 +113,14 @@ fi
 cd ..
 rm -rf AnyKernel3
 rm -rf out/arch/arm64/boot
-echo -e "======================================="
-echo -e "EEEE  K   K  L        EEEE  RRRR "
-echo -e "E     K  K   L        E     R   R"
-echo -e "EEEE  KKK    L        EEEE  RRRR"  
-echo -e "E     K  K   L        E     R  R"
-echo -e "EEEE  K   K  LLLLL    EEEE  R   R" 
-echo -e "======================================="
+echo -e "========================="
+echo -e "  ____    _  __ __     __"
+echo -e " / ___|  | |/ / \ \   / /"
+echo -e " \___ \  | ' /   \ \ / / "
+echo -e "  ___) | | . \    \ V /  "
+echo -e " |____/  |_|\_\    \_/   "
+echo -e "                         "
+echo -e "========================="
 echo -e "Completed in $((SECONDS / 60)) minute(s) and $((SECONDS % 60)) second(s) !"
 if [[ $1 = "-k" || $1 = "--ksu" ]]; then
 echo "Zip: $ZIPNAME_KSU"

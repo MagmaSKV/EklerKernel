@@ -11,9 +11,9 @@
 # Use this script on root of kernel directory
 
 SECONDS=0 # builtin bash timer
-LOCAL_DIR=/opt/munir/
-ZIPNAME="EklerKernel-ginkgo-$(TZ=Asia/Baku date +"%Y%m%d-%H%M").zip"
-ZIPNAME_KSU="EklerKernel-ginkgo-KSU-$(TZ=Asia/Baku date +"%Y%m%d-%H%M").zip"
+LOCAL_DIR=/opt/magmaskv/
+ZIPNAME="SKVKernel-ginkgo-$(TZ=Europe/Madrid date +"%Y%m%d-%H%M").zip"
+ZIPNAME_KSU="SKVKernel-ginkgo-KSU-$(TZ=Europe/Madrid date +"%Y%m%d-%H%M").zip"
 TC_DIR="${LOCAL_DIR}toolchain"
 CLANG_DIR="${TC_DIR}/clang-rastamod"
 GCC_64_DIR="${LOCAL_DIR}toolchain/aarch64-linux-android-4.9"
@@ -66,7 +66,7 @@ echo -e "\nKSU Support, let's Make it On\n"
 curl -kLSs "https://raw.githubusercontent.com/kutemeikito/KernelSU-Next/next/kernel/setup.sh" | bash -s next
 git apply KernelSU-hook.patch
 sed -i 's/CONFIG_KSU=n/CONFIG_KSU=y/g' arch/arm64/configs/vendor/ginkgo-perf_defconfig
-sed -i 's/CONFIG_LOCALVERSION="-EklerKernel"/CONFIG_LOCALVERSION="-EklerKernel-KSU"/g' arch/arm64/configs/vendor/ginkgo-perf_defconfig
+sed -i 's/CONFIG_LOCALVERSION="-SKVKernel"/CONFIG_LOCALVERSION="-SKVKernel-KSU"/g' arch/arm64/configs/vendor/ginkgo-perf_defconfig
 else
 echo -e "\nKSU not Support, let's Skip\n"
 fi

@@ -879,7 +879,7 @@ static int step_chg_notifier_call(struct notifier_block *nb,
 
 	if ((strcmp(psy->desc->name, "battery") == 0)
 			|| (strcmp(psy->desc->name, "usb") == 0)) {
-		__pm_stay_awake(chip->step_chg_ws);
+		//__pm_stay_awake(chip->step_chg_ws);
 		schedule_delayed_work(&chip->status_change_work, 0);
 	}
 
@@ -922,9 +922,7 @@ int qcom_step_chg_init(struct device *dev,
 	if (!chip)
 		return -ENOMEM;
 
-	chip->step_chg_ws = wakeup_source_register(dev, "qcom-step-chg");
-	if (!chip->step_chg_ws)
-		return -EINVAL;
+	chip->step_chg_ws = NULL;
 
 	chip->dev = dev;
 	chip->step_chg_enable = step_chg_enable;

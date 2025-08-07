@@ -4013,7 +4013,7 @@ static int smb5_probe(struct platform_device *pdev)
 		goto free_irq;
 	}
 
-	device_init_wakeup(chg->dev, true);
+	device_init_wakeup(chg->dev, false);
 
 	if (chg->dcin_uusb_over_gpio_en && gpio_is_valid(chg->micro_usb_gpio))
 		smb_micro_usb_irq_handler(chg->micro_usb_irq, chg);

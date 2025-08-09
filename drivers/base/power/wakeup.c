@@ -22,6 +22,8 @@
 #include <linux/irq.h>
 #include <linux/interrupt.h>
 #include <linux/irqdesc.h>
+#include <linux/jiffies.h>
+#include <linux/string.h>
 
 #include "power.h"
 
@@ -589,6 +591,27 @@ static bool wakeup_source_not_registered(struct wakeup_source *ws)
  */
 static void wakeup_source_activate(struct wakeup_source *ws)
 {
+	static const char * const blocked_wl[] = {
+	    "epoll_hvdcp_opti_file",
+	    "epoll_hvdcp_opti_epollfd",
+	    "epoll_android.hardwar_epollfd",
+	    "epoll_android.hardwar_file:NETLINK",
+	    "usb",
+	    "otg_default",
+	    "CHG_PLCY_MAIN_WL",
+	    "CHG_PLCY_HVDCP2_WL",
+	    "CHG_PLCY_HVDCP_WL",
+	    "CHG_PLCY_STD_PD_WL",
+	    "CHG_PLCY_PPS_WL",
+	    "CHG_PLCY_CTM_WL",
+	    "CHG_PLCY_QG_WL",
+	    "CHG_PLCY_SOH_WL",
+	    NULL
+	};
+	static unsigned long last_jiffies[ARRAY_SIZE(blocked_wl)];
+	const unsigned int THROTTLE_MS = 5000; // mínimo intervalo permitido
+	unsigned long now = jiffies;
+
 	unsigned int cec;
 
 	if (WARN_ONCE(wakeup_source_not_registered(ws),
